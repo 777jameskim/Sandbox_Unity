@@ -24,15 +24,57 @@ public class BarScript : MonoBehaviour
     void Start()
     {
         SetBars(barVal);
-        StartCoroutine(UpdateDynamicBar());
-        StartCoroutine(Regeneration());
+        //StartCoroutine(UpdateDynamicBar());
+        //StartCoroutine(Regeneration());
     }
+
+    private IEnumerator UpdateDynamicBar()
+    {
+        while (true)
+        {
+            if (dynamicDelta > 0)
+            {
+                dynamicDelta = dynamicDelta * dynamicRate;
+                SetBar(dynamicbar, dynamicGoal + dynamicDelta);
+            }
+            yield return new WaitForSeconds(1f / framerate);
+        }
+    }
+
+    private IEnumerator Regeneration()
+    {
+        while (true)
+        {
+            if (barVal == maxVal || (death && barVal == 0))
+                regenrate.text = "";
+            else
+            {
+                regenrate.text = $"+{regenVal.ToString("0.0")}";
+                SetBarVal(barVal + regenVal / framerate);
+            }
+            yield return new WaitForSeconds(1f / framerate);
+        }
+    }
+
+    private float timelog = 0;
+    private float maxdelta = 0;
 
     // Update is called once per frame
     void Update()
     {
-
+        if (dynamicDelta > 0)
+        {
+            dynamicDelta = dynamicDelta * (1 - dynamicRate * Time.deltaTime);
+            SetBar(dynamicbar, dynamicGoal + dynamicDelta);
+            timelog += Time.deltaTime;
+            float percentlog = dynamicDelta / maxdelta;
+            Debug.Log($"Time: {timelog}, Percentage: {percentlog}");
+        }
     }
+    //(1-dynamicrate) = subtractpercent / second
+    //dynamicRate = remainpercent / second
+    //deltatime = second / frame
+
 
     private void SetBar(Image bar, float value)
     {
@@ -61,6 +103,9 @@ public class BarScript : MonoBehaviour
             dynamicDelta = 0;
         }
         barVal = value;
+
+        timelog = 0;
+        maxdelta = dynamicDelta;
     }
 
     public void SetBarVal(float value)
@@ -72,35 +117,5 @@ public class BarScript : MonoBehaviour
         if (value > maxVal)
             value = maxVal;
         SetBars(value);
-    }
-
-    private IEnumerator UpdateDynamicBar()
-    {
-        while (true)
-        {
-            if (dynamicDelta > 0)
-            {
-                dynamicDelta = dynamicDelta * dynamicRate;
-                SetBar(dynamicbar, dynamicGoal + dynamicDelta);
-            }
-            yield return new WaitForSeconds(1f / framerate);
-        }
-    }
-
-    private IEnumerator Regeneration()
-    {
-        while (true)
-        {
-            if (barVal == maxVal || (death && barVal == 0))
-            {
-                regenrate.text = "";
-            }
-            else
-            {
-                regenrate.text = $"+{regenVal.ToString("0.0")}";
-                SetBarVal(barVal + regenVal/framerate);
-            }
-            yield return new WaitForSeconds(1f / framerate);
-        }
     }
 }
