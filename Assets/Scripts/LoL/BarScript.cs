@@ -24,8 +24,8 @@ public class BarScript : MonoBehaviour
     void Start()
     {
         SetBars(barVal);
-        //StartCoroutine(UpdateDynamicBar());
-        //StartCoroutine(Regeneration());
+        StartCoroutine(UpdateDynamicBar());
+        StartCoroutine(Regeneration());
     }
 
     private IEnumerator UpdateDynamicBar()
@@ -56,12 +56,13 @@ public class BarScript : MonoBehaviour
         }
     }
 
-    private float timelog = 0;
-    private float maxdelta = 0;
+    //private float timelog = 0;
+    //private float maxdelta = 0;
 
     // Update is called once per frame
     void Update()
     {
+        /*
         if (dynamicDelta > 0)
         {
             dynamicDelta = dynamicDelta * (1 - dynamicRate * Time.deltaTime);
@@ -70,6 +71,7 @@ public class BarScript : MonoBehaviour
             float percentlog = dynamicDelta / maxdelta;
             Debug.Log($"Time: {timelog}, Percentage: {percentlog}");
         }
+        */
     }
     //(1-dynamicrate) = subtractpercent / second
     //dynamicRate = remainpercent / second
@@ -104,8 +106,8 @@ public class BarScript : MonoBehaviour
         }
         barVal = value;
 
-        timelog = 0;
-        maxdelta = dynamicDelta;
+        //timelog = 0;
+        //maxdelta = dynamicDelta;
     }
 
     public void SetBarVal(float value)

@@ -16,7 +16,7 @@ public class BarDebug : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Keypad0))
-            HPbar.SetBarVal(HPbar.barVal);
+            HPbar.SetBarVal(HPbar.maxVal);
         if (Input.GetKeyDown(KeyCode.Keypad1))
             HPbar.SetBarVal(HPbar.barVal - 10);
         if (Input.GetKeyDown(KeyCode.Keypad2))
@@ -36,7 +36,7 @@ public class BarDebug : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Keypad9))
             HPbar.SetBarVal(HPbar.barVal - 90);
         if (Input.GetKeyDown(KeyCode.Alpha0))
-            MPbar.SetBarVal(MPbar.barVal);
+            MPbar.SetBarVal(MPbar.maxVal);
         if (Input.GetKeyDown(KeyCode.Alpha1))
             MPbar.SetBarVal(MPbar.barVal - 10);
         if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -55,7 +55,7 @@ public class BarDebug : MonoBehaviour
             MPbar.SetBarVal(MPbar.barVal - 80);
         if (Input.GetKeyDown(KeyCode.Alpha9))
             MPbar.SetBarVal(MPbar.barVal - 90);
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             HPbar.barVal = HPbar.maxVal;
             HPbar.SetBarVal(HPbar.barVal);
