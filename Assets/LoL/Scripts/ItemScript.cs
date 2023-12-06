@@ -5,21 +5,18 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class DragItem3 : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class ItemScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    CanvasGroup parent;
-
-
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OnDrag(PointerEventData eventData)
